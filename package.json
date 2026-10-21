@@ -7,6 +7,7 @@
   },
   "scripts": {
     "setup": "node scripts/setup.mjs",
+    "predev": "node scripts/setup.mjs",
     "dev": "concurrently --kill-others-on-fail --names service,web --prefix-colors blue,magenta \"npm:dev:service\" \"npm:dev:web\"",
     "dev:service": "tsx watch service/main.ts",
     "dev:web": "react-router dev",
