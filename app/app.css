@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+/* Keep focused or scrolled-to fields clear of the sticky toolbar (WCAG 2.4.11, focus not obscured). */
+html {
+  scroll-padding-top: 5.5rem;
+}
