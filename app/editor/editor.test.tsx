@@ -165,8 +165,15 @@ describe("live preview", () => {
 
     const carousels = within(preview()).getAllByRole("group", { name: /Image carousel/ });
     expect(carousels.map((carousel) => carousel.getAttribute("aria-label"))).toEqual(["Image carousel, 2 images", "Image carousel, 2 images"]);
-    // Queried as elements: an image with empty alt text is decorative and has no "img" role.
-    const sources = (carousel: HTMLElement) => [...carousel.querySelectorAll("img")].map((image) => image.getAttribute("src"));
+    /**
+     * Lists the image sources inside one carousel, in order.
+     *
+     * @param carousel - A carousel element from the preview.
+     * @returns The `src` of every slide image.
+     */
+    const sources = (carousel: HTMLElement) =>
+      // Queried as elements: an image with empty alt text is decorative and has no "img" role.
+      [...carousel.querySelectorAll("img")].map((image) => image.getAttribute("src"));
     expect(sources(carousels[1]!)).toEqual(["https://images.example.com/look-1.jpg", "https://images.example.com/look-2.jpg"]);
     expect(sources(carousels[0]!)).toEqual(["https://images.example.com/hero-1.jpg", "https://images.example.com/hero-2.jpg"]);
   });

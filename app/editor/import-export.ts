@@ -33,8 +33,14 @@ export function serializeForExport(draft: HomeScreen): string {
  * @returns The file name.
  */
 export function exportFileName(date: Date): string {
-  // Local date, because that is what the user expects to see in their downloads folder.
+  /**
+   * Zero-pads a month or day to two digits.
+   *
+   * @param value - Month (1-12) or day of month.
+   * @returns E.g. "05".
+   */
   const pad = (value: number) => String(value).padStart(2, "0");
+  // Local date, because that is what the user expects to see in their downloads folder.
   return `home-screen-${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}.json`;
 }
 

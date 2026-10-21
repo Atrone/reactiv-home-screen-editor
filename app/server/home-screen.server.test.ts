@@ -83,8 +83,15 @@ describe("loadHomeScreen", () => {
   });
 
   it("gives up on a hung service after the timeout", async () => {
-    // Never answers; only the client's abort signal ends the request.
+    /**
+     * Transport that never answers.
+     *
+     * @param _input - Ignored.
+     * @param init - Carries the client's abort signal.
+     * @returns A promise that only settles when the request is aborted.
+     */
     const hang: typeof fetch = (_input, init) =>
+      // Only the client's timeout signal ends the request.
       new Promise((_resolve, reject) => init?.signal?.addEventListener("abort", () => reject(init.signal?.reason)));
     const { client } = setup({ fetch: hang, timeoutMs: 20 });
 
@@ -101,7 +108,14 @@ describe("loadHomeScreen", () => {
   });
 
   it("rejects a success response that does not match the contract", async () => {
-    const drifted: typeof fetch = async () => Response.json({ id: "home", sections: [] });
+    /**
+     * Transport whose 200 response no longer matches the contract.
+     *
+     * @returns A JSON response missing schemaVersion, revision and data.
+     */
+    const drifted: typeof fetch = async () =>
+      // Shaped like an older or newer service the client does not understand.
+      Response.json({ id: "home", sections: [] });
     const { client } = setup({ fetch: drifted });
 
     expect(await loadHomeScreen(client)).toEqual({ status: "unavailable" });
