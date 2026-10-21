@@ -24,6 +24,9 @@ npm run dev
 
 Open http://localhost:5173.
 
+npm 11 may warn that it skipped `esbuild`'s install script ("allow-scripts"). That script only
+verifies the platform binary, which npm installs anyway, so the warning can be ignored.
+
 `npm run dev` first runs `npm run setup`, which creates `.env` from `.env.example` with a freshly
 generated random API key (an existing `.env` is never modified). It then starts both processes:
 
