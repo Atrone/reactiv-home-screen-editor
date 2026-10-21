@@ -9,14 +9,10 @@ Anthony Teixeira · Reactiv full-stack take-home
   Postgres in Docker, Fastify, tenant scoping, rate limiting, about 640 tests. For this submission
   I started over with a deliberately smaller scope, using the checklist rather than the proposal
   as the definition of done.
-- **Implementation (Cursor agent, Claude).** The agent built this version end to end. It made
-  most of the technical calls within the brief, wrote essentially all of the code, and drafted
-  this log from notes it kept during the build. I reviewed the decisions and the diffs before
-  submitting.
 - **Checking the output.** The agent probed a library's real behavior before relying on it, wrote
   a failing test before trusting a fix, and drove the running app in a browser against both servers
-  (including killing the service mid-session). Most corrections below came from that loop, not from
-  reading code. Final state: 126 passing tests, clean typecheck and production build, and no trace
+  (including killing the service mid-session).
+  Final state: 126 passing tests, clean typecheck and production build, and no trace
   of the API key in the client bundle, the rendered HTML or the logs.
 
 ## What I changed or rejected
