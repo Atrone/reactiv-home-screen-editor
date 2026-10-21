@@ -1,0 +1,11 @@
+node_modules/
+build/
+.react-router/
+coverage/
+
+# Local secrets and the SQLite database never leave this machine.
+.env
+data/
+
+*.log
+.DS_Store
